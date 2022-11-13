@@ -76,7 +76,7 @@ def get_equation_and_solve(img_equ, img_ans):
         'outputs/ans/1_ans_canvas_from_app_.png', 'ans')
     print(":::::::: Answer Predicted ::::::::", res_ans)
 
-    return 'Image Found & Saved in Outputs folder. Message from Backend django server....!\n Equation: ' + res_equ + '\n Answer: ' + res_ans
+    return res_equ + '_backend_server_' + res_ans
 
 # Function for solving the prediction
 
@@ -91,10 +91,12 @@ def get_predict_equation(path, name):
     ##### removing noise #####
     # convert to grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    #
+    (_, blackAndWhiteImage) = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
     # blur
-    blur = cv2.GaussianBlur(gray, (0, 0), sigmaX=33, sigmaY=33)
+    blur = cv2.GaussianBlur(blackAndWhiteImage, (0, 0), sigmaX=33, sigmaY=33)
     # divide
-    divide = cv2.divide(gray, blur, scale=255)
+    divide = cv2.divide(blackAndWhiteImage, blur, scale=255)
     # otsu threshold
     thresh = cv2.threshold(
         divide, 0, 255, cv2.THRESH_BINARY+cv2.THRESH_OTSU)[1]
@@ -103,21 +105,23 @@ def get_predict_equation(path, name):
     morph = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
     # write result to disk
     cv2.imwrite("outputs/" + name + "/2_gray_noise_remove.jpg", gray)
-    cv2.imwrite("outputs/" + name + "/3_blur_noise_remove.jpg", blur)
-    cv2.imwrite("outputs/" + name + "/4_divide_noise_remove.jpg", divide)
-    cv2.imwrite("outputs/" + name + "/5_thresh_noise_remove.jpg", thresh)
-    cv2.imwrite("outputs/" + name + "/6_morph_noise_remove.jpg", morph)
+    cv2.imwrite("outputs/" + name +
+                "/3_black_and_white_noise_remove.jpg", blackAndWhiteImage)
+    cv2.imwrite("outputs/" + name + "/4_blur_noise_remove.jpg", blur)
+    cv2.imwrite("outputs/" + name + "/5_divide_noise_remove.jpg", divide)
+    cv2.imwrite("outputs/" + name + "/6_thresh_noise_remove.jpg", thresh)
+    cv2.imwrite("outputs/" + name + "/7_morph_noise_remove.jpg", morph)
 
-    img = thresh
+    # img = thresh
     # img = cv2.imread("output/5_thresh_noise_remove.jpg")
     # img = cv2.imread("output/6_morph_noise_remove.jpg")
 
     # img = cv2.resize(img, (self.canvas_width, self.canvas_height))
-    img_gray = img
+    img_gray = gray
     # img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     print("::::: I\'m here :::::")
     edged = cv2.Canny(img_gray, 30, 150)
-    cv2.imwrite("outputs/" + name + "/7_all_canny_detect.jpg", edged)
+    cv2.imwrite("outputs/" + name + "/8_all_canny_detect.jpg", edged)
     contours = cv2.findContours(
         edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     contours = imutils.grab_contours(contours)
@@ -161,9 +165,9 @@ def get_predict_equation(path, name):
 
     plt.figure(figsize=(10, 10))
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    cv2.imwrite("outputs/" + name + "/8_system_prediction.jpg", img)
+    cv2.imwrite("outputs/" + name + "/9_system_prediction.jpg", img)
     # plt.imshow(img)
-    plt.savefig("outputs/" + name + "/9_with_axis.png")
+    plt.savefig("outputs/" + name + "/10_with_axis.png")
     plt.axis('off')
     plt.savefig("outputs/" + name + "/10_without_axis.png")
 
@@ -186,10 +190,8 @@ def get_predict_equation(path, name):
         print('E Result: {}', e)
 
         print('Value of the expression {} : {}'.format(e, v))
-        return '{} = {}'.format(e, v)
+        return '{}={}'.format(e, v)
 
     except Exception as e:
         print('Error: {}'.format(e))
         return 'Error: {}'.format(e)
-
-    pass
