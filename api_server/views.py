@@ -83,7 +83,7 @@ def get_equation_and_solve(img_equ, img_ans):
 
 def get_predict_equation(path, name):
     print('::::: Solving the equation...' + path + ':::::')
-    model = load_model('trained_model/math_symbol_and_digit_recognition.h5')
+    model = load_model('static/math_symbol_and_digit_recognition.h5')
     chars = []
 
     img = cv2.imread(path)
