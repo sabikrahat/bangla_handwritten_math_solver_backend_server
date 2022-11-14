@@ -73,7 +73,6 @@ TEMPLATES = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR]
 
 WSGI_APPLICATION = 'bangla_handwritten_math_solver_backend_server.wsgi.application'
