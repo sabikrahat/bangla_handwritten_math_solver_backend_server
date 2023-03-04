@@ -1,0 +1,30 @@
+{
+    "version": 1,
+    "builds": [
+        {
+            "src": "bangla_handwritten_math_solver_backend_server/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "runtime": "python3.8.5"
+            }
+        },
+        {
+            "src": "build_files.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "distDir": "staticfiles_build"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "bangla_handwritten_math_solver_backend_server/wsgi.py"
+        }
+    ]
+}

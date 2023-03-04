@@ -14,3 +14,5 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bangla_handwritten_math_solver_backend_server.settings')
 
 application = get_wsgi_application()
+
+app = application
