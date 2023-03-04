@@ -1,5 +1,5 @@
 {
-    "version": 1,
+    "version": 2,
     "builds": [
         {
             "src": "bangla_handwritten_math_solver_backend_server/wsgi.py",
