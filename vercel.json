@@ -5,7 +5,7 @@
             "src": "bangla_handwritten_math_solver_backend_server/wsgi.py",
             "use": "@vercel/python",
             "config": {
-                "maxLambdaSize": "15mb",
+                "maxLambdaSize": "30mb",
                 "runtime": "python3.9"
             }
         },
