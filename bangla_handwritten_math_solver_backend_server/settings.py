@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
+STATIC_DIR = Path.joinpath(BASE_DIR, 'static')
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-_6)3)xixk814cxetonlk6&17m$5_p%@_3oo!6w^9ttef8hed)m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['.vercel.app', '.now.sh', 'localhost', '*']
 ALLOWED_HOSTS = ['*']
 
 
@@ -74,8 +73,8 @@ TEMPLATES = [
 ]
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = [STATIC_DIR]
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [STATIC_DIR]
 
 WSGI_APPLICATION = 'bangla_handwritten_math_solver_backend_server.wsgi.application'
 
@@ -131,6 +130,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-STATICFILES_DIRS = Path.joinpath(BASE_DIR, 'static'),
-STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles_build', 'static')
