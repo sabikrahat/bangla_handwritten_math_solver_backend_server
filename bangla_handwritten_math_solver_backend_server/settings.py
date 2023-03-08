@@ -52,6 +52,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # cors
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+# Allow all domains to access the server's resources
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_HEADERS = [
+    'access-control-allow-origin',
+    'content-type',
+    # add any other headers you want to allow
 ]
 
 ROOT_URLCONF = 'bangla_handwritten_math_solver_backend_server.urls'
